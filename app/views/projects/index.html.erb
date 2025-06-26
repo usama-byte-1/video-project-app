@@ -1,0 +1,15 @@
+<h2>Your Projects</h2>
+<%= link_to "Order New Project", new_project_path, class: "btn btn-primary mb-3" %>
+
+<% @projects.each do |project| %>
+  <div class="card mb-2 p-2">
+    <strong><%= project.name %></strong>
+    <p>Status: <%= project.status %></p>
+    <p>Videos Ordered:</p>
+    <ul>
+      <% project.videos.each do |video| %>
+        <li><%= video.video_type.name %> - $<%= video.video_type.price %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
