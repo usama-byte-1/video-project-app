@@ -1,0 +1,26 @@
+<div class="mb-3">
+  <%= f.label :name, "Project Name", class: "form-label fw-semibold" %>
+  <%= f.text_field :name,
+        class: "form-control #{'is-invalid' if @project.errors[:name].any?}",
+        placeholder: "Enter project name",
+        data: { payment_target: "name" } %>
+  <% if @project.errors[:name].any? %>
+    <div class="invalid-feedback d-block">
+      <%= @project.errors[:name].first %>
+    </div>
+  <% end %>
+</div>
+
+<div class="mb-3">
+  <%= f.label :raw_footage_link, "Footage Link", class: "form-label fw-semibold" %>
+  <%= f.text_field :raw_footage_link,
+        class: "form-control #{'is-invalid' if @project.errors[:raw_footage_link].any?}",
+        placeholder: "Paste raw footage URL",
+        pattern: "https?://.+",
+        data: { payment_target: "link" } %>
+  <% if @project.errors[:raw_footage_link].any? %>
+    <div class="invalid-feedback d-block">
+      <%= @project.errors[:raw_footage_link].first %>
+    </div>
+  <% end %>
+</div>

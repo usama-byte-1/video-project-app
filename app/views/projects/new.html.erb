@@ -1,40 +1,29 @@
-<h2>Order New Project</h2>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <h2 class="mb-4 text-center text-primary">Order New Project</h2>
 
-<%= form_with model: @project, url: projects_path, local: true,
-      data: {
-        controller: "payment",
-        payment_prices_value: @video_types.index_by(&:id).transform_values(&:price).to_json
-      } do |f| %>
+      <%= form_with model: @project, url: projects_path, local: true,
+          data: {
+            controller: "payment",
+            payment_prices_value: @video_types.index_by(&:id).transform_values(&:price).to_json
+          },
+          class: "card shadow p-4" do |f| %>
 
-  <div class="mb-3">
-    <%= f.label :name, "Project Name" %>
-    <%= f.text_field :name, class: "form-control" %>
+        <%= render "form_fields", f: f %>
+        <%= render "video_type_grid" %>
+
+        <div class="text-center">
+          <button type="button"
+                  class="btn btn-success px-4"
+                  data-payment-target="submit"
+                  data-action="payment#openModal">
+            Pay & Submit
+          </button>
+        </div>
+
+        <%= render "payment_modal" %>
+      <% end %>
+    </div>
   </div>
-
-  <div class="mb-3">
-    <%= f.label :raw_footage_link, "Footage Link" %>
-    <%= f.text_field :raw_footage_link, class: "form-control" %>
-  </div>
-
-  <div class="mb-3">
-    <label>Choose Video Types</label>
-    <% @video_types.each do |video_type| %>
-      <div class="form-check">
-        <%= check_box_tag "video_type_ids[]", video_type.id, false,
-            class: "form-check-input",
-            data: { payment_target: "checkbox" } %>
-        <%= label_tag "video_type_ids_#{video_type.id}",
-            "#{video_type.name} ($#{video_type.price})",
-            class: "form-check-label" %>
-      </div>
-    <% end %>
-
-    <p class="mt-2">Total Due: <strong data-payment-target="amount">$0.00</strong></p>
-  </div>
-
-  <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#paymentModal">
-    Pay & Submit
-  </button>
-
-  <%= render "payment_modal" %>
-<% end %>
+</div>
