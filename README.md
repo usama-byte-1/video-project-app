@@ -57,38 +57,37 @@ bin/rails stimulus:manifest:update
 ## Features
 
 Clients can create a new video project by:
-Naming the project
-Adding a footage link (any URL)
-Selecting one or more video types
-A simulated payment modal shows the total cost before submission
+- Naming the project
+- Adding a footage link (any URL)
+- Selecting one or more video types
+- A simulated payment modal shows the total cost before submission
 
-After submission:
-A new project is created
-The default PM (linked to the client) is assigned
-A background notification is created for the PM (async job)
-Clients can see a list of all their submitted projects
+#### After submission:
+- A new project is created
+- The default PM (linked to the client) is assigned
+- A background notification is created for the PM (async job)
+- Clients can see a list of all their submitted projects
 
 
 ### Test Coverage
 
 RSpec has been used to test the following:
 
-Model validations and associations:
+#### Model validations and associations:
 Client, Project, Video, VideoType, Notification
 
-Background job:
-CreateNotificationJob — ensures a notification is created correctly
+#### Background job:
+```CreateNotificationJob``` ensures a notification is created correctly
 
-Controller logic:
+#### Controller logic:
 Project creation and redirection flow
 
 To run tests:
+```bash
 bundle exec rspec
-
+```
 ### Notes
 
-Client login is simulated (Client.first is used for now)
-
-PM assignment is defaulted based on the client
-
-No actual payment integration payment is simulated only via a Bootstrap modal
+- Client login is simulated (```Client.first``` is used for now)
+- PM assignment is defaulted based on the client
+- No actual payment integration payment is simulated only via a Bootstrap modal
